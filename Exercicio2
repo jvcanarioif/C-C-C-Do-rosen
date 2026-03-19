@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main()
+{
+    int metros;
+    int resultado;
+        
+    printf("Informe um numero em metro: ");
+    scanf("%d", &metros);
+    
+    resultado = metros * 1000;
+
+    printf("Esse numero convertido em milimetros é: %d\n", resultado);
+
+    return 0;
+}
