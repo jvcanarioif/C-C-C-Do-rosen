@@ -1,0 +1,30 @@
+    #include <stdio.h>
+
+    int main()
+    {
+        int dias;
+        int horas;
+        int minutos;
+        int segundos1;
+        int segundos2;
+        int segundos3;
+        int totalsegundos;
+            
+        printf("Informe quantos dias deseja saber em segundos: ");
+        scanf("%d", &dias);
+
+        printf("Informe quantas horas deseja saber em segundos: ");
+        scanf("%d", &horas);
+
+        printf("Informe quantos minutos deseja saber em segundos: ");
+        scanf("%d", &minutos);
+        
+        segundos1 = dias * 86400;
+        segundos2 = horas * 3600;
+        segundos3 = minutos * 60;
+        totalsegundos = segundos1 + segundos2 + segundos3;
+        
+        printf("O total de segundos é: %d\n", totalsegundos);
+        
+        return 0;
+    }
