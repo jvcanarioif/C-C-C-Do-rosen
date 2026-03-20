@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main()
+{
+    int salario;
+    int percentual;
+
+
+    printf("Informe qual o seu salario atual: ");
+    scanf("%d", &salario);
+
+    printf("Informe a porcentagem de aumento: ");
+    scanf("%d", &percentual);
+
+    aumento = salario * percentual / 100;
+    novoSalario = salario + aumento;
+
+    printf("Valor do aumento: %d\n", aumento);
+    printf("Novo salario: %d\n", novoSalario);
+
+    return 0;
+}
