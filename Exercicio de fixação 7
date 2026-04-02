@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int main()
+{
+    int cel, far;
+    printf("Escreva a temperatura em graus Celcius :");
+    scanf("%d", &cel);
+    far = 9 * cel/5 + 32;
+    printf("%d graus Celcius é aproximadamente %d graus em Fahrenheit", cel,far);
+}
