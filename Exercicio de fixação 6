@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main()
+{
+    int vel, dist;
+    printf("escreva a distancia da em km : ");
+    scanf("%d", &dist);
+    printf("escreva a sua velocidade media(km por hora)) : ");
+    scanf("%d", &vel);
+    int temp = dist / vel;
+    printf("essa viagem vai levar  aproximadamente %d horas", temp);
+}
