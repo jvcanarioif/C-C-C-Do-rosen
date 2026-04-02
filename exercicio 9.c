@@ -2,11 +2,11 @@
 
 int main()
 {
-    int kms, dias, preco;
-    printf("digite por quantos dias o carro foi alugado :");
+    int km, dias, preco;
+    printf("Escreva por quantos dias o carro ira ser alugado :");
     scanf("%d", &dias);
     printf("digite quantos quilometros o carro andou :");
-    scanf("%d", &kms);
-    preco = (dias * 60) + (kms * .15);
+    scanf("%d", &km);
+    preco = (dias * 60) + (km * .15);
     printf("o valor total do aluguel é R$%d", preco);
 }
