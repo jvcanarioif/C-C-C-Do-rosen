@@ -3,14 +3,14 @@
 int main()
 {
     int dia, ano;
-    printf("digite quantos cigarros o individuo fuma por dia :");
+    printf("Esscreva quantos cigarros o individuo fumaPdia :");
     scanf("%d", &dia);
-    printf("digite quantos anos o individuo ja fumou :");
+    printf("Escreva quantos anos o individuo ja fumou :");
     scanf("%d", &ano);
     
     ano = (dia * 365) * ano;
     dia = (ano * 10) / 1440;
 
-    printf("o individuo perdeu %d dias de sua vida", dia);
+    printf("o individuo perdeu %d dias de sua vida por fumar", dia);
 
 }
