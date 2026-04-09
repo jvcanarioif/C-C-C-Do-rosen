@@ -1,0 +1,153 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static int totalCartas = 5;
+    static string nomeJogador = "Cavaleiro Vazio";
+    static string nomeMaquina = "Radiância";
+
+    static Random r = new Random();
+
+    static string[] nomes = {
+        "Vespa","Zote","Quirrel","Grimm",
+        "Nosk","Mestre das Almas","Defensor do Esterco",
+        "Cavaleiro Observador","Parente Perdido",
+        "Vaso Quebrado","O Colecionador","Cavaleiro da Colmeia"
+    };
+
+    static void Main()
+    {
+        int op = 0;
+
+        while (op != 3)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Hollow Knight Trunfo ===");
+            Console.WriteLine("1 - Novo Jogo");
+            Console.WriteLine("2 - Configurações");
+            Console.WriteLine("3 - Sair");
+            Console.Write("Escolha: ");
+            int.TryParse(Console.ReadLine(), out op);
+
+            if (op == 1) Jogo();
+            if (op == 2) Config();
+        }
+    }
+
+    static void Config()
+    {
+        Console.Clear();
+
+        Console.Write("Digite seu nome: ");
+        string nome = Console.ReadLine();
+        if (!string.IsNullOrEmpty(nome))
+            nomeJogador = nome;
+
+        Console.Write("Quantidade de cartas: ");
+        int valor;
+        if (int.TryParse(Console.ReadLine(), out valor) && valor > 0)
+            totalCartas = valor;
+
+        Console.WriteLine("\nConfigurações salvas!");
+        Console.WriteLine("Pressione ENTER para voltar...");
+        Console.ReadLine();
+    }
+
+    static (string, int[]) NovaCarta()
+    {
+        return (
+            nomes[r.Next(nomes.Length)],
+            new int[]
+            {
+                r.Next(1,101),
+                r.Next(1,101),
+                r.Next(1,101)
+            }
+        );
+    }
+
+    static void MostrarCartas(List<(string, int[])> p, List<(string, int[])> m)
+    {
+        Console.WriteLine("\n--- Suas cartas ---");
+        foreach (var c in p)
+            Console.Write(c.Item1 + " | ");
+
+        Console.WriteLine("\n\n--- Cartas da Radiância ---");
+        foreach (var c in m)
+            Console.Write(c.Item1 + " | ");
+
+        Console.WriteLine("\n");
+    }
+
+    static void Jogo()
+    {
+        List<(string, int[])> p = new List<(string, int[])>();
+        List<(string, int[])> m = new List<(string, int[])>();
+
+        for (int i = 0; i < totalCartas; i++)
+        {
+            p.Add(NovaCarta());
+            m.Add(NovaCarta());
+        }
+
+        while (p.Count > 0 && m.Count > 0)
+        {
+            Console.Clear();
+
+            var cj = p[0];
+            var cm = m[0];
+
+            Console.WriteLine($"--- {nomeJogador} ---");
+            Console.WriteLine("Inseto: " + cj.Item1);
+            Console.WriteLine("1-Força: " + cj.Item2[0]);
+            Console.WriteLine("2-Carcaça: " + cj.Item2[1]);
+            Console.WriteLine("3-Agilidade: " + cj.Item2[2]);
+            Console.Write("Escolha: ");
+
+            int escolha;
+            int.TryParse(Console.ReadLine(), out escolha);
+            escolha--;
+
+            if (escolha < 0 || escolha > 2) continue;
+
+            Console.WriteLine($"\n--- {nomeMaquina} ---");
+            Console.WriteLine("Inseto: " + cm.Item1);
+            Console.WriteLine("Valor: " + cm.Item2[escolha]);
+
+            if (cj.Item2[escolha] > cm.Item2[escolha])
+            {
+                Console.WriteLine("\nVocê venceu a rodada!");
+                p.Add(cm);
+                m.RemoveAt(0);
+            }
+            else if (cj.Item2[escolha] < cm.Item2[escolha])
+            {
+                Console.WriteLine("\nA Radiância venceu a rodada...");
+                m.Add(cj);
+                p.RemoveAt(0);
+            }
+            else
+            {
+                Console.WriteLine("\nEmpate!");
+            }
+
+            Console.WriteLine($"\nCartas -> Você: {p.Count} | Radiância: {m.Count}");
+
+            MostrarCartas(p, m);
+
+            Console.WriteLine("Pressione ENTER para continuar...");
+            Console.ReadLine();
+        }
+
+        Console.Clear();
+
+        if (p.Count > 0)
+            Console.WriteLine($"{nomeJogador} salvou Hallownest!");
+        else
+            Console.WriteLine("A Radiância venceu...");
+
+        Console.WriteLine("\nPressione ENTER para voltar ao menu...");
+        Console.ReadLine();
+    }
+}
